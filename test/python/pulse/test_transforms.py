@@ -421,6 +421,22 @@ class TestCompressTransform(QiskitTestCase):
         self.assertEqual(len(original_pulse_ids), 6)
         self.assertEqual(len(compressed_pulse_ids), 2)
 
+    def test_long_schedules(self):
+        """Test long schedules."""
+        schedules = []
+        for _ in range(2):
+            schedule = Schedule()
+            drive_channel = DriveChannel(0)
+            schedule += Play(Waveform([0.0, 0.1]), drive_channel)
+            schedule += Play(Waveform([0.0, 0.1]), drive_channel)
+            schedule += Play(Waveform([0.0, 0.2]), drive_channel)
+            schedules.append(schedule)
+
+        compressed_schedule = transforms.compress_pulses(schedules)
+        original_pulse_ids = get_pulse_ids(schedules)
+        compressed_pulse_ids = get_pulse_ids(compressed_schedule)
+        self.assertEqual(len(original_pulse_ids), 6)
+        self.assertEqual(len(compressed_pulse_ids), 2)
 
 class TestAlignSequential(QiskitTestCase):
     """Test sequential alignment transform."""
