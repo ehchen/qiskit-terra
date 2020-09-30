@@ -140,7 +140,11 @@ class Gaussian(ParametricPulse):
                    in the class docstring.
             name: Display name for this pulse envelope.
         """
-        self._amp = complex(amp)
+        # self._amp = complex(amp)
+        if isinstance(amp,list):
+            self._amp = amp[0] +1j*amp[1]
+        else:
+            self._amp = complex(amp)
         self._sigma = sigma
         super().__init__(duration=duration, name=name)
 
@@ -211,7 +215,11 @@ class GaussianSquare(ParametricPulse):
             width: The duration of the embedded square pulse.
             name: Display name for this pulse envelope.
         """
-        self._amp = complex(amp)
+        # self._amp = complex(amp)
+        if isinstance(amp,list):
+            self._amp = amp[0] +1j*amp[1]
+        else:
+            self._amp = complex(amp)
         self._sigma = sigma
         self._width = width
         super().__init__(duration=duration, name=name)
@@ -306,7 +314,11 @@ class Drag(ParametricPulse):
             beta: The correction amplitude.
             name: Display name for this pulse envelope.
         """
-        self._amp = complex(amp)
+        # self._amp = complex(amp)
+        if isinstance(amp,list):
+            self._amp = amp[0] +1j*amp[1]
+        else:
+            self._amp = complex(amp)
         self._sigma = sigma
         self._beta = beta
         super().__init__(duration=duration, name=name)
@@ -392,7 +404,11 @@ class ConstantPulse(ParametricPulse):
             amp: The amplitude of the constant square pulse.
             name: Display name for this pulse envelope.
         """
-        self._amp = complex(amp)
+        # self._amp = complex(amp)
+        if isinstance(amp,list):
+            self._amp = amp[0] +1j*amp[1]
+        else:
+            self._amp = complex(amp)
         super().__init__(duration=duration, name=name)
 
     @property
